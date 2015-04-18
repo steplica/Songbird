@@ -18,10 +18,6 @@ public class music {
         System.out.println(getOctaveOfFreq(2050.00));
         System.out.println(autoTune(16.5));
 
-        for (double d : freqs) {
-            System.out.println(d);
-        }
-
         for (int i = 0; i <= 1975.53; i++) {
             if (freqMatches(i, 1975.53, 1)) {
                 System.out.println("Accurate Frequency: " + i + " Hz");
@@ -29,9 +25,10 @@ public class music {
         }
 
         for (;;) {
-            System.out.println(autoTune(getRandomFreq()));
+            double newNote = autoTune(getRandomFreq());
+            System.out.println(toString(newNote) + "\t@ " + newNote);
             try {
-                Thread.sleep(100);
+                Thread.sleep(500);
             } catch (InterruptedException ex) {
                 Thread.currentThread().interrupt();
             }
@@ -104,19 +101,16 @@ public class music {
     }
 
     /**
-     * @param note
-     * @return string representation of given note.
-     */
-    public static String toString(int note){
-        return "";
-    }
-
-    /**
      * @param freq
      * @return string representation of given frequency
      */
     public static String toString(double freq){
-        return "";
+        for(int note=0; note < freqs.length; note++){
+            if(freqs[note] == freq){
+                return notes[note%12];
+            }
+        }
+        return null;
     }
 
     /**
