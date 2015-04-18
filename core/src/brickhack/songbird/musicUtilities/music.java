@@ -1,0 +1,131 @@
+package brickhack.songbird.musicUtilities;
+
+import java.lang.Thread;
+import java.util.Random;
+
+public class music {
+
+    static double[] freqs = new double[120];
+    static String[] notes = { "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#",
+            "A", "A#", "B" };
+
+    public static void main(String[] args) {
+
+        initialize();
+
+        // Everything below is a test for the methods in this class
+
+        System.out.println(getOctaveOfFreq(2050.00));
+        System.out.println(autoTune(16.5));
+
+        for (double d : freqs) {
+            System.out.println(d);
+        }
+
+        for (int i = 0; i <= 1975.53; i++) {
+            if (freqMatches(i, 1975.53, 1)) {
+                System.out.println("Accurate Frequency: " + i + " Hz");
+            }
+        }
+
+        for (;;) {
+            System.out.println(autoTune(getRandomFreq()));
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException ex) {
+                Thread.currentThread().interrupt();
+            }
+        }
+
+    }
+
+    /**
+     * Determine if the given frequency is close enough to the target to pass
+     * @param currentFreq
+     * @param targetFreq
+     * @param slack
+     * @return TRUE if frequency is in slack region.
+     */
+    public static boolean freqMatches(double currentFreq, double targetFreq, double slack) {
+        while (getOctaveOfFreq(currentFreq) >= 0
+                && getOctaveOfFreq(currentFreq) < getOctaveOfFreq(targetFreq)) {
+            currentFreq *= 2;
+        }
+        if (currentFreq <= targetFreq + slack / 100 * targetFreq
+                && currentFreq >= targetFreq - slack / 100 * targetFreq) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * @param freq
+     * @return nearest frequency of a perfect note.
+     */
+    public static double autoTune(double freq) {
+        int note = 0;
+        double low = freqs[note];
+        double up = freqs[note + 1];
+        while (freq < low || freq > up) {
+            note++;
+            low = freqs[note];
+            up = freqs[note + 1];
+        }
+        if (freq - low < up - freq) {
+            return low;
+        } else {
+            return up;
+        }
+    }
+
+    /**
+     * @param freq
+     * @return octave that the given frequency is in.
+     */
+    public static int getOctaveOfFreq(double freq) {
+        if (freq < freqs[0]) {
+            return -1;
+        }
+        int octave = 0;
+        while (freq > freqs[11]) {
+            freq /= 2;
+            octave++;
+        }
+        return octave;
+    }
+
+    /**
+     * @return a random frequency from the 0th octave.
+     */
+    public static double getRandomFreq() {
+        Random random = new Random();
+        return autoTune(random.nextInt((int) (freqs[11] - freqs[0] + 1))
+                + freqs[0]);
+    }
+
+    /**
+     * @param note
+     * @return string representation of given note.
+     */
+    public static String toString(int note){
+        return "";
+    }
+
+    /**
+     * @param freq
+     * @return string representation of given frequency
+     */
+    public static String toString(double freq){
+        return "";
+    }
+
+    /**
+     * Fills an array with all note frequency for the 0th octave.
+     */
+    private static void initialize() {
+        for (int note = 0; note < freqs.length; note++) {
+            freqs[note] = 440 * Math.pow(Math.pow(2, (double) 1 / 12),
+                    note - 57);
+        }
+    }
+}
