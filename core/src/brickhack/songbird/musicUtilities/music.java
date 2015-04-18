@@ -17,6 +17,8 @@ public class music {
 
         System.out.println(getOctaveOfFreq(2050.00));
         System.out.println(autoTune(16.5));
+        System.out.println(toString(17));
+        System.out.println(toString(21));
 
         for (int i = 0; i <= 1975.53; i++) {
             if (freqMatches(i, 1975.53, 1)) {
@@ -101,10 +103,12 @@ public class music {
     }
 
     /**
+     * Returns nearest note matching given frequency
      * @param freq
      * @return string representation of given frequency
      */
     public static String toString(double freq){
+        freq = autoTune(freq);
         for(int note=0; note < freqs.length; note++){
             if(freqs[note] == freq){
                 return notes[note%12];
