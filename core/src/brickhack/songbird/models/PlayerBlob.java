@@ -5,5 +5,7 @@ package brickhack.songbird.models;
  *
  * Created by fifthparallel on 4/18/2015.
  */
-public class PlayerBlob {
+public class PlayerBlob implements Model {
+
+    public void update() {}
 }

@@ -9,5 +9,8 @@ package brickhack.songbird.models;
  *
  * Created by fifthparallel on 4/18/2015.
  */
-public class LockBlob {
+public class LockBlob implements Model {
+
+    public void update() {}
+
 }

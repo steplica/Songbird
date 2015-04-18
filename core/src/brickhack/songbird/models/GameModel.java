@@ -7,5 +7,8 @@ package brickhack.songbird.models;
  *
  * Created by fifthparallel on 4/18/2015.
  */
-public class GameModel {
+public class GameModel implements Model {
+
+    public void update() {}
+    
 }
