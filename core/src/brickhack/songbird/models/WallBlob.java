@@ -5,5 +5,8 @@ package brickhack.songbird.models;
  *
  * Created by fifthparallel on 4/18/2015.
  */
-public class WallBlob {
+public class WallBlob implements Model, Blob {
+
+    public void update() {}
+    public void draw() {}
 }

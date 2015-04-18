@@ -9,6 +9,11 @@ package brickhack.songbird.models;
  */
 public class GameModel implements Model {
 
+    /**
+     * The maximum height an object's top can be.
+     */
+    public static final int MAX_HEIGHT = 100;
+
     public void update() {}
-    
+
 }

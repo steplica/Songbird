@@ -9,8 +9,20 @@ package brickhack.songbird.models;
  *
  * Created by fifthparallel on 4/18/2015.
  */
-public class LockBlob implements Model {
+public class LockBlob implements Model, Blob {
+
+    /**
+     * boolean that represents whether the lock is unlocked
+     */
+    private boolean locked = true;
+
+    public boolean toggleLock() {
+        locked = !locked;
+        return locked;
+    }
 
     public void update() {}
+
+    public void draw() {}
 
 }
