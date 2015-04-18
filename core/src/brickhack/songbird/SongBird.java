@@ -11,15 +11,12 @@ import com.badlogic.gdx.utils.Timer;
 
 public class SongBird extends ApplicationAdapter {
 
-	private SpriteBatch batch;
-    private Texture img;
     private ShapeRenderer shapeRenderer;
+    private int boxWidth = 400;
 
 	@Override
 	public void create () {
         this.shapeRenderer = new ShapeRenderer();
-        batch = new SpriteBatch();
-		img = new Texture("badlogic.jpg");
 	}
 
 	@Override
@@ -31,12 +28,10 @@ public class SongBird extends ApplicationAdapter {
 
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
         shapeRenderer.setColor(Color.CYAN);
-        shapeRenderer.rect(0,0, 600, 600);
-        shapeRenderer.end();
 
-        // DRAW
-		batch.begin();
-		batch.draw(img, 0, 0);
-		batch.end();
+        this.boxWidth += Gdx.graphics.getDeltaTime() * 100.f;
+
+        shapeRenderer.rect(0,0, this.boxWidth, this.boxWidth);
+        shapeRenderer.end();
 	}
 }
