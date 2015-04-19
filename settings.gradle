@@ -1,2 +1,1 @@
-include ':fft'
 include 'android', 'core', 'ios'
