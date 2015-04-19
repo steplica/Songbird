@@ -52,7 +52,7 @@ public class PlayerBlob implements Blob {
      * currently singing, then draws the player blob
      */
     public void update(int y) {
-        playerBody.setTransform(100, y, 0);
+        playerBody.setTransform(100, y - (texture.getWidth() / 2), 0);
     }
     public void draw( SpriteBatch batch) {
         batch.draw(texture, playerBody.getPosition().x, playerBody.getPosition().y);
