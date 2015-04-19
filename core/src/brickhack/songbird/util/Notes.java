@@ -91,13 +91,16 @@ public class Notes {
      * @return string representation of given frequency
      */
     public static String toString(double freq){
+        if(freq < freqs[0]){
+            return "freq too small";
+        }
         freq = autoTune(freq);
         for(int note=0; note < freqs.length; note++){
             if(freqs[note] == freq){
                 return notes[note%12];
             }
         }
-        return null;
+        return "";
     }
 
     /**
