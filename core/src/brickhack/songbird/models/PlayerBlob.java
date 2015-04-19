@@ -21,19 +21,18 @@ public class PlayerBlob implements Model, Blob {
     private BodyDef playerBodyDef;
     private Body playerBody;
     private Texture texture;
-    private Sprite sprite;
 
-    public PlayerBlob(World world, Vector2 center, float radius) {
+    public PlayerBlob(World world, Vector2 lower_left_vertex, int radius) {
         /*
          * Body definitions for the creation and use of the object in the game world
          */
         playerBodyDef = new BodyDef();
         playerBodyDef.type = BodyDef.BodyType.KinematicBody;
-        playerBodyDef.position.set(center);
+        playerBodyDef.position.set(lower_left_vertex);
         playerBody = world.createBody(playerBodyDef);
 
         CircleShape circle = new CircleShape();
-        circle.setRadius(radius/2); // set to radius of the width of the player object
+        circle.setRadius(radius); // set to radius of the width of the player object
         playerBody.createFixture(circle, 0.5f);
 
         circle.dispose();
@@ -41,23 +40,11 @@ public class PlayerBlob implements Model, Blob {
         /*
          * Definitions for drawing the object
          */
-        Pixmap pixmap = new Pixmap(128,128, Pixmap.Format.RGBA8888);
-        pixmap.setColor(Color.RED);
-        pixmap.drawCircle((int)center.x, (int)center.y, (int)(radius / 2));
-        texture = new Texture(pixmap);
-        pixmap.dispose();
-
-        // sprite object of texture with lower left corner vector at the center of the circle minus
-        // the radius.
-        sprite = new Sprite(
-                texture,
-                (int) (center.x - radius),
-                (int) (center.y - radius),
-                (int) (2*radius),
-                (int) (2*radius)
-        );
-        sprite.setPosition(center.x - radius, center.y - radius);
-
+         Pixmap pixmap = new Pixmap( (2*radius), (2*radius), Pixmap.Format.RGBA8888 );
+         pixmap.setColor( Color.GREEN );
+         pixmap.fillCircle( radius, radius, radius );
+         texture = new Texture( pixmap );
+         pixmap.dispose();
     }
 
     /**
@@ -68,6 +55,6 @@ public class PlayerBlob implements Model, Blob {
 
     }
     public void draw( SpriteBatch batch) {
-        sprite.draw(batch);
+        batch.draw(texture, playerBody.getPosition().x, playerBody.getPosition().y);
     }
 }

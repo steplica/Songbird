@@ -1,5 +1,6 @@
 package brickhack.songbird.models;
 
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.math.Vector2;
@@ -13,8 +14,15 @@ import com.badlogic.gdx.math.Vector2;
  */
 public class GameModel implements Model {
 
-    public GameModel() {
+    private PlayerBlob player;
+    private WallBlob topWall;
+    private WallBlob botWall;
+    private LockBlob gate;
+    private World world;
 
+    public GameModel() {
+        world = new World(new Vector2(0,0), true);
+        player = new PlayerBlob(world, new Vector2(50, 1080/2),WallBlob.WALL_WIDTH - 10);
     }
 
     /**
@@ -24,5 +32,9 @@ public class GameModel implements Model {
 
     public void update() {
 
+    }
+
+    public void draw(SpriteBatch spriteBatch) {
+        player.draw(spriteBatch);
     }
 }

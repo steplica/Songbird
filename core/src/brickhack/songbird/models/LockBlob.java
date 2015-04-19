@@ -52,26 +52,16 @@ public class LockBlob implements Model, Blob {
 
         lockRect.dispose();
 
-        Pixmap pixmap = new Pixmap(64, 256, Pixmap.Format.RGBA8888);
+        Pixmap pixmap = new Pixmap(SIDE_LENGTH, SIDE_LENGTH, Pixmap.Format.RGBA8888);
         pixmap.setColor(Color.YELLOW);
-        pixmap.fill();
         pixmap.drawRectangle(
-                (int) lower_left_vertex.x,
-                (int) lower_left_vertex.y,
+                0, 0,
                 SIDE_LENGTH,
                 SIDE_LENGTH
         );
+        pixmap.fill();
         texture = new Texture(pixmap);
         pixmap.dispose();
-
-        sprite = new Sprite(
-                texture,
-                (int) lower_left_vertex.x,
-                (int) lower_left_vertex.y,
-                SIDE_LENGTH,
-                SIDE_LENGTH
-        );
-        sprite.setPosition(lower_left_vertex.x, lower_left_vertex.y);
     }
 
     public boolean toggleLock(boolean on) {
@@ -82,7 +72,7 @@ public class LockBlob implements Model, Blob {
     public void update() {}
 
     public void draw( SpriteBatch batch ) {
-        sprite.draw(batch);
+        batch.draw(texture, lockBody.getPosition().x, lockBody.getPosition().y);
     }
 
 }
