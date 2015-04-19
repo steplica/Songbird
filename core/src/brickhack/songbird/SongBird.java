@@ -19,6 +19,10 @@ public class SongBird extends ApplicationAdapter {
         this.pitchInterface = pitchInterface;
     }
 
+    public PitchInterface getPitchEngineInstance() {
+        return pitchInterface;
+    }
+
     @Override
 	public void create () {
         this.shapeRenderer = new ShapeRenderer();
