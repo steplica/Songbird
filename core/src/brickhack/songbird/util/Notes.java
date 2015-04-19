@@ -109,36 +109,4 @@ public class Notes {
                     note - 57);
         }
     }
-
-    /**
-     * Strictly used to for testing these methods
-     * REMOVE
-     * @param args
-     */
-    public static void main(String[] args) {
-
-        initialize();
-
-        System.out.println(getOctaveOfFreq(2050.00));
-        System.out.println(autoTune(16.5));
-        System.out.println(toString(17));
-        System.out.println(toString(21));
-        System.out.println(freqToAltitude(262));
-
-        for (int i = 0; i <= 1975.53; i++) {
-            if (freqMatches(i, 1975.53, 1)) {
-                System.out.println("Accurate Frequency: " + i + " Hz");
-            }
-        }
-
-        for (;;) {
-            double newNote = autoTune(getRandomFreq());
-            System.out.println(toString(newNote) + "\t@ " + newNote);
-            try {
-                Thread.sleep(500);
-            } catch (InterruptedException ex) {
-                Thread.currentThread().interrupt();
-            }
-        }
-    }
 }
