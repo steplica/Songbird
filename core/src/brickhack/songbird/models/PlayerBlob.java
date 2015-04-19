@@ -1,5 +1,7 @@
 package brickhack.songbird.models;
 
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+
 /**
  * The class that represents the blob the player is controlling using their voice.
  *
@@ -9,10 +11,14 @@ public class PlayerBlob implements Model, Blob {
 
     private int height = GameModel.MAX_HEIGHT / 2;
 
+    public PlayerBlob() {
+
+    }
+
     /**
      * Gets the pitch the user is currently singing and sets the height to what pitch they're
      * currently singing, then draws the player blob
      */
     public void update() {}
-    public void draw() {}
+    public void draw( SpriteBatch batch) {}
 }

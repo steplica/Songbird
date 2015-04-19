@@ -1,5 +1,7 @@
 package brickhack.songbird.models;
 
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+
 /**
  * An interface that represents the contract for what Blobs that need to be drawn need to do.
  *
@@ -7,6 +9,6 @@ package brickhack.songbird.models;
  */
 public interface Blob {
 
-    public void draw();
+    public void draw( SpriteBatch batch );
 
 }

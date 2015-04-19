@@ -1,5 +1,7 @@
 package brickhack.songbird.models;
 
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+
 /**
  * Contains related data and methods for a corresponding
  * visual locked 'gate' the user needs to unlock by getting
@@ -10,6 +12,8 @@ package brickhack.songbird.models;
  * Created by fifthparallel on 4/18/2015.
  */
 public class LockBlob implements Model, Blob {
+
+    private int width = WallBlob.WALL_WIDTH;
 
     /**
      * boolean that represents whether the lock is unlocked
@@ -23,6 +27,6 @@ public class LockBlob implements Model, Blob {
 
     public void update() {}
 
-    public void draw() {}
+    public void draw( SpriteBatch batch ) {}
 
 }
