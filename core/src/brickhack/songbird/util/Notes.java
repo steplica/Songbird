@@ -1,9 +1,9 @@
-package brickhack.songbird.musicUtilities;
+package brickhack.songbird.util;
 
 import java.lang.Thread;
 import java.util.Random;
 
-public class music {
+public class Notes {
 
     // Stores 10 octaves worth of frequencies (10 * 12)
     static double[] freqs = new double[120];
@@ -68,13 +68,12 @@ public class music {
     /**
      * Translates player's frequency into a y-altitude on the phone
      * @param freq
-     * @param screenHeight
      * @return a number from 0 to 100 representing player's altitude
      */
-    public static double freqToAltitude(double freq, double screenHeight){
+    public static double freqToAltitude(double freq){
         double max = freqs[12*(getOctaveOfFreq(freq)+1)-1] - freqs[12*getOctaveOfFreq(freq)];
         freq -= freqs[12*getOctaveOfFreq(freq)];
-        return freq / max * 100;
+        return freq / max;
     }
 
     /**
@@ -124,7 +123,7 @@ public class music {
         System.out.println(autoTune(16.5));
         System.out.println(toString(17));
         System.out.println(toString(21));
-        System.out.println(freqToAltitude(262, 1024));
+        System.out.println(freqToAltitude(262));
 
         for (int i = 0; i <= 1975.53; i++) {
             if (freqMatches(i, 1975.53, 1)) {
