@@ -6,8 +6,8 @@ import java.util.Random;
 public class Notes {
 
     // Stores 10 octaves worth of frequencies (10 * 12)
-    static double[] freqs = new double[120];
-    static String[] notes = { "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#",
+    public static double[] freqs = new double[120];
+    public static String[] notes = { "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#",
             "A", "A#", "B" };
 
     /**

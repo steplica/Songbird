@@ -18,9 +18,9 @@ import static com.badlogic.gdx.graphics.Color.WHITE;
  *
  * Created by fifthparallel on 4/18/2015.
  */
-public class WallBlob implements Model, Blob {
+public class WallBlob implements Blob {
 
-    public static final int WALL_WIDTH = 25;
+    public static final int WALL_WIDTH = 90;
 
     BodyDef wallBodyDef;
     Body wallBody;
@@ -45,30 +45,20 @@ public class WallBlob implements Model, Blob {
 
         wall.dispose();
 
-        Pixmap pixmap = new Pixmap(64, 256, Pixmap.Format.RGBA8888);
+        Pixmap pixmap = new Pixmap(WALL_WIDTH, (int)height, Pixmap.Format.RGBA8888);
         pixmap.setColor(Color.WHITE);
-        pixmap.fill();
         pixmap.drawRectangle(
-            (int) lower_left_vertex.x,
-            (int) lower_left_vertex.y,
+            0, 0,
             WALL_WIDTH,
             (int) height
         );
+        pixmap.fill();
         texture = new Texture(pixmap);
         pixmap.dispose();
-
-        sprite = new Sprite(
-                texture,
-                (int) lower_left_vertex.x,
-                (int) lower_left_vertex.y,
-                WALL_WIDTH,
-                (int) height
-        );
-        sprite.setPosition(lower_left_vertex.x, lower_left_vertex.y);
     }
 
     public void draw( SpriteBatch batch ) {
-        sprite.draw(batch);
+        batch.draw(texture, wallBody.getPosition().x, wallBody.getPosition().y);
     }
     public void update() {}
 }

@@ -20,7 +20,7 @@ public class AndroidPitch implements PitchInterface {
             @Override
             public void handlePitch(PitchDetectionResult result,AudioEvent e) {
                 final float pitchInHz = result.getPitch();
-                if(result.getProbability() > 0.50) {
+                if(result.getProbability() > 0.90) {
                     curPitch = pitchInHz;
                 } else {
                     curPitch = 0;

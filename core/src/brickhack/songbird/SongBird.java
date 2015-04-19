@@ -6,59 +6,41 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
-import com.badlogic.gdx.physics.box2d.World;
 
-import brickhack.songbird.models.PlayerBlob;
+import brickhack.songbird.models.GameModel;
 import brickhack.songbird.util.Notes;
 
 public class SongBird extends ApplicationAdapter {
 
-    private ShapeRenderer shapeRenderer;
-    private int boxWidth = 400;
+    private SpriteBatch spriteBatch;
+    private GameModel gameModel;
 
-    private PitchInterface pitchInterface;
+    private static PitchInterface pitchInterface;
 
     public SongBird(PitchInterface pitchInterface) {
         this.pitchInterface = pitchInterface;
     }
 
-    public PitchInterface getPitchEngineInstance() {
+    public static PitchInterface getPitchEngineInstance() {
         return pitchInterface;
     }
 
     @Override
 	public void create () {
-        this.shapeRenderer = new ShapeRenderer();
-	}
+        this.spriteBatch = new SpriteBatch();
+        this.gameModel = new GameModel();
+        Notes.initialize();
+    }
 
 	@Override
 	public void render () {
-        // SET BACKGROUND COLOR
-        //System.out.println(Gdx.graphics.getDeltaTime());
-
-        System.out.println(this.pitchInterface.getPitch());
-
-        Gdx.gl.glClearColor(1, 0, 0, 1);
+        Gdx.gl.glClearColor(0.3f, 0.3f, 0.3f, 0.4f);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-//        shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-//        shapeRenderer.setColor(Color.CYAN);
-//
-//        this.boxWidth += Gdx.graphics.getDeltaTime() * 100.0f;
-//
-//        shapeRenderer.rect(0,0, this.boxWidth, this.boxWidth);
-        // added
-        World world = new World(new Vector2(0,0), true);
-        SpriteBatch batch = new SpriteBatch();
-        PlayerBlob blah = new PlayerBlob(world, new Vector2(500,500), 15);
-        batch.begin();
-        blah.draw(batch);
-        batch.end();
+        gameModel.update();
 
-        batch.dispose();
-
-        //shapeRenderer.end();
+        spriteBatch.begin();
+        gameModel.draw(spriteBatch);
+        spriteBatch.end();
 	}
 }
