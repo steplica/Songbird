@@ -1,9 +1,11 @@
 package brickhack.songbird.models;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Rectangle;
-
-import java.util.Vector;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.EdgeShape;
+import com.badlogic.gdx.physics.box2d.World;
 
 /**
  * Class representing a generated wall blob that a PlayerBoB cannot pass through.
@@ -14,15 +16,26 @@ public class WallBlob implements Model, Blob {
 
     public static final int WALL_WIDTH = 25;
 
-    private Rectangle wall;
+    BodyDef wallBodyDef;
+    Body wallBody;
 
-    public WallBlob(int x_pos, int y_pos, int height) {
+    public WallBlob(World world, Vector2 lower_left_vertex, float height) {
+        wallBodyDef = new BodyDef();
+        wallBodyDef.type = BodyDef.BodyType.KinematicBody;
+        wallBodyDef.position.set(lower_left_vertex);
+        wallBody = world.createBody(wallBodyDef);
 
-        wall = new Rectangle();
-        wall.x = x_pos;
-        wall.y = y_pos;
-        wall.width = WALL_WIDTH;
-        wall.height = height;
+        EdgeShape wall = new EdgeShape();
+        wall.set(
+                lower_left_vertex,
+                new Vector2(
+                    lower_left_vertex.x + WALL_WIDTH,
+                    lower_left_vertex.y + height
+                )
+        );
+        wallBody.createFixture(wall, 0.5f);
+
+        wall.dispose();
     }
 
     public void draw( SpriteBatch batch ) {}
