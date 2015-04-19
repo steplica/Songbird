@@ -25,8 +25,8 @@ public class Notes {
                 && getOctaveOfFreq(currentFreq) < getOctaveOfFreq(targetFreq)) {
             currentFreq *= 2;
         }
-        if (currentFreq <= targetFreq + slack / 100 * targetFreq
-                && currentFreq >= targetFreq - slack / 100 * targetFreq) {
+        if (currentFreq >= targetFreq - slack / 100 * targetFreq
+                && currentFreq <= targetFreq + slack / 100 * targetFreq) {
             return true;
         }
         return false;
@@ -90,8 +90,8 @@ public class Notes {
      */
     public static double getRandomFreq() {
         Random random = new Random();
-        return autoTune(random.nextInt((int) (freqs[11] - freqs[0] + 1))
-                + freqs[0]);
+        return autoTune(random.nextInt((int) (freqs[107] - freqs[96] + 1))
+                + freqs[107]);
     }
 
     /**

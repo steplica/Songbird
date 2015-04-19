@@ -27,9 +27,9 @@ public class SongBird extends ApplicationAdapter {
 
     @Override
 	public void create () {
+        Notes.initialize();
         this.spriteBatch = new SpriteBatch();
         this.gameModel = new GameModel();
-        Notes.initialize();
     }
 
 	@Override

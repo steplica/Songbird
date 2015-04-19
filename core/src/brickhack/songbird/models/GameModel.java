@@ -22,6 +22,14 @@ public class GameModel {
     private LockBlob gate;
     private World world;
 
+    private boolean easyMode = true;
+
+    private double slack = 5;
+    private int horizontalSpeed = -8;
+
+    public double targetFreq = Notes.getRandomFreq();
+    private int x = 1920 - 128;
+
     public GameModel() {
         world = new World(new Vector2(0,0), true);
         player = new PlayerBlob(world, new Vector2(50, 1080/2),32);
@@ -30,19 +38,20 @@ public class GameModel {
     public void update() {
         double currFreq = SongBird.getPitchEngineInstance().getPitch();
         if(currFreq >= Notes.freqs[0]){
-            System.out.println(currFreq);
-            player.update((int)(1080 * Notes.freqToAltitude(currFreq)));
+            if(easyMode){
+                player.update((int)(1080 * Notes.freqToAltitude(Notes.autoTune(currFreq))));
+            } else {
+                player.update((int)(1080 * Notes.freqToAltitude(currFreq)));
+            }
         }
-
-        topWall.update();
-        botWall.update();
-        gate.update();
+        if(Notes.freqMatches(currFreq, targetFreq, slack)){
+            System.out.println("IT MATCHES!!!");
+            targetFreq = Notes.getRandomFreq();
+            System.out.println("New Target: " + targetFreq);
+        }
     }
 
     public void draw(SpriteBatch spriteBatch) {
         player.draw(spriteBatch);
-        topWall.draw(spriteBatch);
-        botWall.draw(spriteBatch);
-        gate.draw(spriteBatch);
     }
 }

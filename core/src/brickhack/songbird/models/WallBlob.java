@@ -60,5 +60,7 @@ public class WallBlob implements Blob {
     public void draw( SpriteBatch batch ) {
         batch.draw(texture, wallBody.getPosition().x, wallBody.getPosition().y);
     }
-    public void update() {}
+    public void update() {
+
+    }
 }
