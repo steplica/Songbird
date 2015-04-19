@@ -35,10 +35,12 @@ public class GameModel {
         topWall = new WallBlob(
                 world,
                 new Vector2(x_coord_start,(float) ((0.5 * WallBlob.WALL_WIDTH) + ran_note )),
+                (float)(1080 - ran_note)
         );
         botWall = new WallBlob(
                 world,
                 new Vector2(x_coord_start, 0),
+                (float) ( ran_note )
         );
     }
 
