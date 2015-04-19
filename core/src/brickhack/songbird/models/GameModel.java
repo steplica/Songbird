@@ -28,15 +28,21 @@ public class GameModel {
     }
 
     public void update() {
-
         double currFreq = SongBird.getPitchEngineInstance().getPitch();
         if(currFreq >= Notes.freqs[0]){
             System.out.println(currFreq);
             player.update((int)(1080 * Notes.freqToAltitude(currFreq)));
         }
+
+        topWall.update();
+        botWall.update();
+        gate.update();
     }
 
     public void draw(SpriteBatch spriteBatch) {
         player.draw(spriteBatch);
+        topWall.draw(spriteBatch);
+        botWall.draw(spriteBatch);
+        gate.draw(spriteBatch);
     }
 }
