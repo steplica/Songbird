@@ -18,6 +18,9 @@ public class Notes {
      * @return TRUE if frequency is in slack region.
      */
     public static boolean freqMatches(double currentFreq, double targetFreq, double slack) {
+        if(currentFreq < freqs[0] || targetFreq < freqs[0]){
+            return false;
+        }
         while (getOctaveOfFreq(currentFreq) >= 0
                 && getOctaveOfFreq(currentFreq) < getOctaveOfFreq(targetFreq)) {
             currentFreq *= 2;
@@ -50,6 +53,9 @@ public class Notes {
      * @return nearest frequency of a perfect note.
      */
     public static double autoTune(double freq) {
+        if(freq < freqs[0]){
+            return -1;
+        }
         int note = 0;
         double low = freqs[note];
         double up = freqs[note + 1];
@@ -71,6 +77,9 @@ public class Notes {
      * @return a number from 0 to 100 representing player's altitude
      */
     public static double freqToAltitude(double freq){
+        if(freq < freqs[0]){
+            return -1;
+        }
         double max = freqs[12*(getOctaveOfFreq(freq)+1)-1] - freqs[12*getOctaveOfFreq(freq)];
         freq -= freqs[12*getOctaveOfFreq(freq)];
         return freq / max;
@@ -92,7 +101,7 @@ public class Notes {
      */
     public static String toString(double freq){
         if(freq < freqs[0]){
-            return "freq too small";
+            return null;
         }
         freq = autoTune(freq);
         for(int note=0; note < freqs.length; note++){
@@ -100,7 +109,7 @@ public class Notes {
                 return notes[note%12];
             }
         }
-        return "";
+        return null;
     }
 
     /**
