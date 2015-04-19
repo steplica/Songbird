@@ -36,9 +36,7 @@ public class UserModel implements Model {
     /**
      * Hidden constructor for the singleton user instance.
      */
-    protected UserModel() {
-        playerBlob = new PlayerBlob();
-    }
+    protected UserModel() {    }
 
     /**
      * The method to get the singleton user instance.

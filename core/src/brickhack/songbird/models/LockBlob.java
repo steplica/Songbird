@@ -1,6 +1,11 @@
 package brickhack.songbird.models;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.EdgeShape;
+import com.badlogic.gdx.physics.box2d.World;
 
 /**
  * Contains related data and methods for a corresponding
@@ -13,15 +18,37 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
  */
 public class LockBlob implements Model, Blob {
 
-    private int width = WallBlob.WALL_WIDTH;
+    private static final int SIDE_LENGTH = WallBlob.WALL_WIDTH;
 
     /**
      * boolean that represents whether the lock is unlocked
      */
     private boolean locked = true;
 
-    public boolean toggleLock() {
-        locked = !locked;
+    BodyDef lockBodyDef;
+    Body lockBody;
+
+    public LockBlob(World world, Vector2 lower_left_vertex) {
+        lockBodyDef = new BodyDef();
+        lockBodyDef.type = BodyDef.BodyType.KinematicBody;
+        lockBodyDef.position.set(lower_left_vertex);
+        lockBody = world.createBody(lockBodyDef);
+
+        EdgeShape lockRect = new EdgeShape();
+        lockRect.set(
+                lower_left_vertex,
+                new Vector2(
+                        lower_left_vertex.x + SIDE_LENGTH,
+                        lower_left_vertex.y + SIDE_LENGTH
+                )
+        );
+        lockBody.createFixture(lockRect, 0.5f);
+
+        lockRect.dispose();
+    }
+
+    public boolean toggleLock(boolean on) {
+        locked = on;
         return locked;
     }
 
