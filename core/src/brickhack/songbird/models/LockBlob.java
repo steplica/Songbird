@@ -64,12 +64,22 @@ public class LockBlob implements Blob {
         pixmap.dispose();
     }
 
+    public void new_value(int y_pos) {
+        lockBody.setTransform(1920 - 128, y_pos - (SIDE_LENGTH / 2), 0.0f);
+    }
+
+    public boolean hasPassedBar() {
+        return ((lockBody.getPosition().x) <= (0 - SIDE_LENGTH));
+    }
+
     public boolean toggleLock(boolean on) {
         locked = on;
         return locked;
     }
 
-    public void update() {}
+    public void update() {
+
+    }
 
     public void draw( SpriteBatch batch ) {
         batch.draw(texture, lockBody.getPosition().x, lockBody.getPosition().y);
