@@ -82,7 +82,8 @@ public class LockBlob implements Blob {
     }
 
     public void draw( SpriteBatch batch ) {
-        batch.draw(texture, lockBody.getPosition().x, lockBody.getPosition().y);
+        if(locked)
+            batch.draw(texture, lockBody.getPosition().x, lockBody.getPosition().y);
     }
 
 }
