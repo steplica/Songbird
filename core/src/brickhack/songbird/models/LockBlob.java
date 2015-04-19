@@ -1,5 +1,9 @@
 package brickhack.songbird.models;
 
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Pixmap;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
@@ -27,6 +31,8 @@ public class LockBlob implements Model, Blob {
 
     BodyDef lockBodyDef;
     Body lockBody;
+    Texture texture;
+    Sprite sprite;
 
     public LockBlob(World world, Vector2 lower_left_vertex) {
         lockBodyDef = new BodyDef();
@@ -45,6 +51,27 @@ public class LockBlob implements Model, Blob {
         lockBody.createFixture(lockRect, 0.5f);
 
         lockRect.dispose();
+
+        Pixmap pixmap = new Pixmap(64, 256, Pixmap.Format.RGBA8888);
+        pixmap.setColor(Color.YELLOW);
+        pixmap.fill();
+        pixmap.drawRectangle(
+                (int) lower_left_vertex.x,
+                (int) lower_left_vertex.y,
+                SIDE_LENGTH,
+                SIDE_LENGTH
+        );
+        texture = new Texture(pixmap);
+        pixmap.dispose();
+
+        sprite = new Sprite(
+                texture,
+                (int) lower_left_vertex.x,
+                (int) lower_left_vertex.y,
+                SIDE_LENGTH,
+                SIDE_LENGTH
+        );
+        sprite.setPosition(lower_left_vertex.x, lower_left_vertex.y);
     }
 
     public boolean toggleLock(boolean on) {
@@ -54,6 +81,8 @@ public class LockBlob implements Model, Blob {
 
     public void update() {}
 
-    public void draw( SpriteBatch batch ) {}
+    public void draw( SpriteBatch batch ) {
+        sprite.draw(batch);
+    }
 
 }

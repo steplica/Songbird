@@ -14,6 +14,7 @@ public class GameModel implements Model {
      */
     public static final int MAX_HEIGHT = 100;
 
-    public void update() {}
+    public void update() {
 
+    }
 }
