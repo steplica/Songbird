@@ -11,14 +11,7 @@ import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.EdgeShape;
 import com.badlogic.gdx.physics.box2d.World;
 
-import static com.badlogic.gdx.graphics.Color.WHITE;
-
-/**
- * Class representing a generated wall blob that a PlayerBoB cannot pass through.
- *
- * Created by fifthparallel on 4/18/2015.
- */
-public class WallBlob implements Blob {
+public class WallBlob {
 
     public static final int WALL_WIDTH = 90;
 
@@ -26,32 +19,20 @@ public class WallBlob implements Blob {
     Body wallBody;
     Texture texture;
     Sprite sprite;
+    EdgeShape wall;
+    Pixmap pixmap;
+    boolean isUpperWall;
 
-    public WallBlob(World world, Vector2 lower_left_vertex, float height) {
+    public WallBlob(World world, Vector2 referencePoint, boolean isUpper) {
         wallBodyDef = new BodyDef();
         wallBodyDef.type = BodyDef.BodyType.KinematicBody;
-        wallBodyDef.position.set(lower_left_vertex);
+        wallBodyDef.position.set(referencePoint);
         wallBody = world.createBody(wallBodyDef);
+        isUpperWall = isUpper;
 
-        EdgeShape wall = new EdgeShape();
-        wall.set(
-                lower_left_vertex,
-                new Vector2(
-                    lower_left_vertex.x + WALL_WIDTH,
-                    lower_left_vertex.y + height
-                )
-        );
-        wallBody.createFixture(wall, 0.5f);
-
-        wall.dispose();
-
-        Pixmap pixmap = new Pixmap(WALL_WIDTH, (int)height, Pixmap.Format.RGBA8888);
+        pixmap = new Pixmap(WALL_WIDTH, 1080, Pixmap.Format.RGBA8888);
         pixmap.setColor(Color.WHITE);
-        pixmap.drawRectangle(
-            0, 0,
-            WALL_WIDTH,
-            (int) height
-        );
+        pixmap.drawRectangle(0, 0, WALL_WIDTH, 1080);
         pixmap.fill();
         texture = new Texture(pixmap);
         pixmap.dispose();
@@ -60,6 +41,7 @@ public class WallBlob implements Blob {
     public void draw( SpriteBatch batch ) {
         batch.draw(texture, wallBody.getPosition().x, wallBody.getPosition().y);
     }
+
     public void update() {
 
     }

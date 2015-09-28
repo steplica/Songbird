@@ -11,16 +11,7 @@ import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.EdgeShape;
 import com.badlogic.gdx.physics.box2d.World;
 
-/**
- * Contains related data and methods for a corresponding
- * visual locked 'gate' the user needs to unlock by getting
- * to that pitch level.
- *
- * Stores state of an instance of a Gate and data for how to display it.
- *
- * Created by fifthparallel on 4/18/2015.
- */
-public class LockBlob implements Blob {
+public class LockBlob {
 
     private static final int SIDE_LENGTH = WallBlob.WALL_WIDTH;
 

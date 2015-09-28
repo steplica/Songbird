@@ -3,7 +3,6 @@ package brickhack.songbird.models;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
@@ -11,12 +10,7 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.World;
 
-/**
- * The class that represents the blob the player is controlling using their voice.
- *
- * Created by fifthparallel on 4/18/2015.
- */
-public class PlayerBlob implements Blob {
+public class PlayerBlob {
 
     private BodyDef playerBodyDef;
     private Body playerBody;
@@ -51,9 +45,10 @@ public class PlayerBlob implements Blob {
      * Gets the pitch the user is currently singing and sets the height to what pitch they're
      * currently singing, then draws the player blob
      */
-    public void update(int y) {
-        playerBody.setTransform(100, y - (texture.getWidth() / 2), 0);
+    public void update(int newHeight) {
+        playerBody.setTransform(100, newHeight - (texture.getWidth() / 2), 0);
     }
+
     public void draw( SpriteBatch batch) {
         batch.draw(texture, playerBody.getPosition().x, playerBody.getPosition().y);
     }

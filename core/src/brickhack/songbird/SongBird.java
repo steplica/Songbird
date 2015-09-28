@@ -12,7 +12,6 @@ import brickhack.songbird.util.Notes;
 
 public class SongBird extends ApplicationAdapter {
 
-    private SpriteBatch spriteBatch;
     private GameModel gameModel;
 
     private static PitchInterface pitchInterface;
@@ -28,7 +27,6 @@ public class SongBird extends ApplicationAdapter {
     @Override
 	public void create () {
         Notes.initialize();
-        this.spriteBatch = new SpriteBatch();
         this.gameModel = new GameModel();
     }
 
@@ -36,11 +34,6 @@ public class SongBird extends ApplicationAdapter {
 	public void render () {
         Gdx.gl.glClearColor(0.3f, 0.3f, 0.3f, 0.4f);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
         gameModel.update();
-
-        spriteBatch.begin();
-        gameModel.draw(spriteBatch);
-        spriteBatch.end();
 	}
 }

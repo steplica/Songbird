@@ -1,6 +1,5 @@
 package brickhack.songbird.util;
 
-import java.lang.Thread;
 import java.util.Random;
 
 public class Notes {
